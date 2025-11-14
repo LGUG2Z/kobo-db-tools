@@ -52,13 +52,14 @@ mod tests {
             book_id: "book1".to_string(),
             book_title: "Book Title".to_string(),
             chapter_title: "Chapter Title".to_string(),
+            author: "Author".to_string(),
             color: 1,
             chapter_progress: 0.5,
             create_date: "2025-07-05T10:00:00Z".to_string(),
             write_date: "2025-07-05T10:00:00Z".to_string(),
         }];
 
-        let expected_csv = "content_id,content,book_id,book_title,chapter_title,color,chapter_progress,create_date,write_date\ncontent1,content text,book1,Book Title,Chapter Title,1,0.5,2025-07-05T10:00:00Z,2025-07-05T10:00:00Z\n".to_string();
+        let expected_csv = "content_id,content,book_id,book_title,chapter_title,author,color,chapter_progress,create_date,write_date\ncontent1,content text,book1,Book Title,Chapter Title,Author,1,0.5,2025-07-05T10:00:00Z,2025-07-05T10:00:00Z\n".to_string();
         let result = bookmarks.to_csv().unwrap();
         assert_eq!(result, expected_csv);
     }
@@ -71,6 +72,7 @@ mod tests {
             book_id: "book1".to_string(),
             book_title: "Book Title".to_string(),
             chapter_title: "Chapter Title".to_string(),
+            author: "Author".to_string(),
             color: 1,
             chapter_progress: 0.5,
             create_date: "2025-07-05T10:00:00Z".to_string(),
