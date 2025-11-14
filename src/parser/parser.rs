@@ -170,9 +170,14 @@ impl Parser {
                             let progress = attr.progress.parse::<u8>().unwrap_or(0);
 
                             if attr.volumeid.is_none() {
-                                if let (Some(title), Some(author)) = (attr.title.clone(), attr.author.clone()) {
+                                if let (Some(title), Some(author)) =
+                                    (attr.title.clone(), attr.author.clone())
+                                {
                                     if !books_from_events.contains_key(&title) {
-                                        books_from_events.insert(title.clone(), Book::new(author, title, None, "".to_string()));
+                                        books_from_events.insert(
+                                            title.clone(),
+                                            Book::new(author, title, None, "".to_string()),
+                                        );
                                     }
                                 }
                             } else if attr.title.is_none() {
@@ -367,10 +372,7 @@ fn get_books_by_volume_id(
             let title: String = row.get("Title")?;
             let authors: String = row.get("Authors")?;
             let book_id: String = row.get("BookID")?;
-            books.insert(
-                volume_id.clone(),
-                Book::new(authors, title, None, book_id),
-            );
+            books.insert(volume_id.clone(), Book::new(authors, title, None, book_id));
         }
     }
 
@@ -379,7 +381,7 @@ fn get_books_by_volume_id(
 
 #[cfg(test)]
 mod tests {
-    use super::{Parser, ParseOption};
+    use super::{ParseOption, Parser};
     use rusqlite::Connection;
 
     fn setup_test_db() -> Connection {
@@ -494,7 +496,7 @@ mod tests {
                 "{\"progress\":\"10\",\"volumeid\":\"book1\"}", "{\"ButtonPressCount\":10,\"SecondsRead\":300,\"PagesTurned\":5}"
             ],
         ).unwrap();
-        
+
         db.execute(
             "INSERT INTO content (ContentID, Title, ContentType, Attribution, BookID) VALUES (?, ?, ?, ?, ?)",
             &["book1", "The Real Book Title", "6", "Author One", "book1"],
