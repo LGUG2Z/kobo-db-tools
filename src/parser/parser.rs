@@ -213,7 +213,10 @@ impl Parser {
                             ) {
                                 Ok(Some(session)) => sessions_vec.add_session(session),
                                 Ok(None) => {}
-                                Err(e) => eprintln!("Errore evento {}: {:?}", &event_id, e),
+                                Err(_e) => {
+                                    // TODO: add library logging
+                                    // eprintln!("Errore evento {}: {:?}", &event_id, e)
+                                },
                             }
                         }
                     }

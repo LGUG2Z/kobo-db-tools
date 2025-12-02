@@ -8,6 +8,7 @@ pub struct Bookmark {
     pub book_id: String,
     pub book_title: String,
     pub chapter_title: Option<String>,
+    pub annotation: Option<String>,
     pub author: String,
     pub color: u8,
     pub chapter_progress: f64,
@@ -26,6 +27,7 @@ SELECT
     bm.ChapterProgress,
     bm.DateCreated,
     bm.DateModified,
+    bm.Annotation,
     c.Title,
     c.Attribution AS Author,
     c899.Title AS ChapterTitle
@@ -56,6 +58,7 @@ WHERE bm.Text IS NOT NULL AND bm.Text != ''
                 book_id: row.get("VolumeID")?,
                 book_title: row.get("Title")?,
                 chapter_title: row.get("ChapterTitle")?,
+                annotation: row.get("Annotation")?,
                 author: row.get("Author")?,
                 color: row.get("Color")?,
                 chapter_progress: row.get("ChapterProgress")?,
